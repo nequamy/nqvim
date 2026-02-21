@@ -1,0 +1,30 @@
+.config/
+    nvim/
+    	lua/
+	    config.lua -- Конфиги
+	    keymap.lua -- Хот-кеи
+	    plugins.lua -- Плагины
+	    autocmd.lua 
+	lsp/
+	    rust.lua
+	    lua.lua
+	after/
+	init.lua
+
+Plugins:
+- vim.pack
+- lualine +
+- mason + 
+- netrw
+- blinc.cmp + 
+- fzf +
+
+
+
+
+
+
+
+
+
+
