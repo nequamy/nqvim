@@ -216,11 +216,56 @@ require("dashboard").setup({
 		header = make_header(),
 		vertical_center = true,
 		center = {
-			{ icon = "  ", icon_hl = "DashboardIcon", desc = "Find File           ", desc_hl = "DashboardDesc", key = "f", key_hl = "DashboardKey", key_format = " [%s]", action = "FzfLua files" },
-			{ icon = "  ", icon_hl = "DashboardIcon", desc = "Recent Files        ", desc_hl = "DashboardDesc", key = "r", key_hl = "DashboardKey", key_format = " [%s]", action = "FzfLua oldfiles" },
-			{ icon = "  ", icon_hl = "DashboardIcon", desc = "Live Grep           ", desc_hl = "DashboardDesc", key = "g", key_hl = "DashboardKey", key_format = " [%s]", action = "FzfLua live_grep" },
-			{ icon = "  ", icon_hl = "DashboardIcon", desc = "Config              ", desc_hl = "DashboardDesc", key = "c", key_hl = "DashboardKey", key_format = " [%s]", action = "edit ~/.config/nvim/init.lua" },
-			{ icon = "  ", icon_hl = "DashboardIcon", desc = "Quit                ", desc_hl = "DashboardDesc", key = "q", key_hl = "DashboardKey", key_format = " [%s]", action = "quit" },
+			{
+				icon = "  ",
+				icon_hl = "DashboardIcon",
+				desc = "Find File           ",
+				desc_hl = "DashboardDesc",
+				key = "f",
+				key_hl = "DashboardKey",
+				key_format = " [%s]",
+				action = "FzfLua files"
+			},
+			{
+				icon = "  ",
+				icon_hl = "DashboardIcon",
+				desc = "Recent Files        ",
+				desc_hl = "DashboardDesc",
+				key = "r",
+				key_hl = "DashboardKey",
+				key_format = " [%s]",
+				action = "FzfLua oldfiles"
+			},
+			{
+				icon = "  ",
+				icon_hl = "DashboardIcon",
+				desc = "Live Grep           ",
+				desc_hl = "DashboardDesc",
+				key = "g",
+				key_hl = "DashboardKey",
+				key_format = " [%s]",
+				action = "FzfLua live_grep"
+			},
+			{
+				icon = "  ",
+				icon_hl = "DashboardIcon",
+				desc = "Config              ",
+				desc_hl = "DashboardDesc",
+				key = "c",
+				key_hl = "DashboardKey",
+				key_format = " [%s]",
+				action = "edit ~/.config/nvim/init.lua"
+			},
+			{
+				icon = "  ",
+				icon_hl = "DashboardIcon",
+				desc = "Quit                ",
+				desc_hl = "DashboardDesc",
+				key = "q",
+				key_hl = "DashboardKey",
+				key_format = " [%s]",
+				action = "quit"
+			},
 		},
 		footer = function()
 			local ms = vim.fn.reltimefloat(vim.fn.reltime(vim.g._start_time)) * 1000
@@ -246,10 +291,10 @@ require("gitsigns").setup({
 	current_line_blame = true,
 	signs = {
 		add          = { text = "│" },
-        change       = { text = "│" },
-        delete       = { text = "_" },
-        topdelete    = { text = "‾" },
-        changedelete = { text = "~" },
+		change       = { text = "│" },
+		delete       = { text = "_" },
+		topdelete    = { text = "‾" },
+		changedelete = { text = "~" },
 	}
 })
 
@@ -273,8 +318,8 @@ require("venv-selector").setup()
 
 -- 20 Noise For Better UI Expirience
 vim.pack.add({
-	{ src = "https://github.com/folke/noice.nvim", name = "noise.nvim" },
-    { src = "https://github.com/rcarriga/nvim-notify", name = "nvim-notify" },
+	{ src = "https://github.com/folke/noice.nvim",     name = "noise.nvim" },
+	{ src = "https://github.com/rcarriga/nvim-notify", name = "nvim-notify" },
 })
 require("notify").setup({
 	background_colour = "#000000"
@@ -303,4 +348,3 @@ vim.pack.add({
 	{ src = "https://github.com/folke/todo-comments.nvim", name = "todo-comments.nvim" }
 })
 require("todo-comments").setup()
-
