@@ -57,26 +57,23 @@ vim.pack.add({
 	{ src = "https://github.com/hrsh7th/cmp-path",     name = "cmp-path" },
 })
 
-local cmp = require('cmp')
-cmp.setup({
-	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
-		{ name = 'buffer' },
-		{ name = 'path' },
-	}),
-	mapping = cmp.mapping.preset.insert({
-		['<C-j>'] = cmp.mapping.select_next_item(),
-		['<C-k>'] = cmp.mapping.select_prev_item(),
-		['<C-n>'] = cmp.mapping.confirm({ select = true }),
-		['<C-y>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.abort(),
-		['<C-b>'] = cmp.mapping.scroll_docs(-4),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-	}),
-	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
+require('cmp').setup({
+	require("lua.settings.cmp")
+})
+require('cmp').setup.cmdline({ '/', '?' }, {
+	mapping = require('cmp').mapping.preset.cmdline(),
+	sources = {
+		{ name = 'buffer' }
+	}
+})
+require('cmp').setup.cmdline(':', {
+	mapping = require('cmp').mapping.preset.cmdline(),
+	sources = {
+		{ name = 'path' }
 	},
+	{
+		{ name = 'cmdline' }
+	}
 })
 
 -- 6 Treesitter Plugin
