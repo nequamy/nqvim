@@ -2,6 +2,7 @@
 
 ![dashboard](assets/dashboard.png)
 ![editor](assets/editor.png)
+![fzf](assets/fzf.png)
 
 ## Описание
 
