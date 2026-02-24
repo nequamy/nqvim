@@ -1,8 +1,0 @@
-hello
-my
-name
-is
-alexander
-and
-then
-false
