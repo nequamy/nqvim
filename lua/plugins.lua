@@ -82,45 +82,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", name = "nvim-treesitter-textobjects" },
 })
 require("nvim-treesitter").setup({
-	ensure_installed = { "lua", "python", "rust", "html", "css" },
-
-	highlight = {
-		enable = true,
-		additional_im_regex_highlighting = false,
-	},
-	indent = { enable = true },
-	autotage = { enable = true },
-
-	textobjects = {
-		select = {
-			enable = true,
-			lookahead = true,
-			kemaps = {
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
-				["ac"] = "@class.outer",
-				["ic"] = "@class.inner",
-				["aa"] = "@parameter.outer",
-				["ia"] = "@parameter.inner",
-			},
-			include_surrounding_whitespace = false,
-		},
-
-		move = {
-			enable = true,
-			set_jumps = true,
-		},
-
-		swap = {
-			enable = true,
-			swap_next = {
-				["<leader>a"] = "@parameter.inner",
-			},
-			spaw_previous = {
-				["<leader>A"] = "@parameter.inner",
-			},
-		},
-	},
+	require("lua.settings.treesitter")
 })
 
 -- 7 Smart Comments Plugin
