@@ -208,35 +208,7 @@ vim.pack.add({
 })
 
 require("neo-tree").setup({
-	filesystem = {
-		filtered_items = {
-			hide_dotfiles = false,
-			hide_gitignored = false,
-		},
-		follow_current_file = {
-			enabled = true,
-		},
-		use_libuv_file_watcher = true,
-	},
-	window = {
-		position = "left",
-		width = 35,
-	},
-	default_component_configs = {
-		git_status = {
-			symbols = {
-				added     = "✚",
-				modified  = "",
-				deleted   = "✖",
-				renamed   = "󰁕",
-				untracked = "",
-				ignored   = "",
-				unstaged  = "󰄱",
-				staged    = "",
-				conflict  = "",
-			},
-		},
-	},
+	require("lua.settings.otree")
 })
 
 -- 13 Rustaceanvim Plugin For Better UI-utils them rust-analyzer
