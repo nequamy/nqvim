@@ -1,18 +1,31 @@
 return {
-	ensure_installed = { "lua", "python", "rust", "html", "css" },
+	ensure_installed = {
+		"lua",
+		"toml",
+		"javascript",
+		"typescript",
+		"json",
+		"yaml",
+		"markdown",
+		"bash",
+		"python",
+		"rust",
+		"html",
+		"css",
+		"regex",
+	},
 
 	highlight = {
 		enable = true,
-		additional_im_regex_highlighting = false,
+		additional_vim_regex_highlighting = false,
 	},
 	indent = { enable = true },
-	autotage = { enable = true },
 
 	textobjects = {
 		select = {
 			enable = true,
 			lookahead = true,
-			kemaps = {
+			keymaps = {
 				["af"] = "@function.outer",
 				["if"] = "@function.inner",
 				["ac"] = "@class.outer",
@@ -33,7 +46,7 @@ return {
 			swap_next = {
 				["<leader>a"] = "@parameter.inner",
 			},
-			spaw_previous = {
+			swap_previous = {
 				["<leader>A"] = "@parameter.inner",
 			},
 		},
