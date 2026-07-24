@@ -6,15 +6,24 @@
 -- переключение буфера, нажатие клавиш и т.д.
 -- =============================================================================
 
--- При открытии Neovim с аргументом-директорией — перейти в неё.
--- Пример: nvim ~/projects/myapp → автоматически cd в ~/projects/myapp
--- Это нужно для корректной работы LSP (он ищет корень проекта от текущей директории)
--- и для fzf-lua (поиск файлов будет в нужной директории).
+-- При открытии Neovim с аргументом-директорией открываем Snacks Explorer в ней.
+-- Пример: nvim ~/projects/myapp.
+-- Ждём UIEnter: Dashboard успевает создать стартовое окно, затем рядом появляется Explorer.
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
 		local arg = vim.fn.argv(0)
 		if arg and arg ~= "" and vim.fn.isdirectory(arg) == 1 then
-			vim.cmd.cd(arg)
+			local dir = vim.fn.fnamemodify(arg, ":p")
+
+			-- Убираем имя буфера-директории, чтобы Snacks Dashboard занял стартовое окно.
+			vim.api.nvim_buf_set_name(0, "")
+
+			vim.api.nvim_create_autocmd("UIEnter", {
+				once = true,
+				callback = function()
+					require("snacks").explorer({ cwd = dir })
+				end,
+			})
 		end
 	end,
 })
@@ -35,21 +44,38 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Автосохранение файлов.
--- Срабатывает при трёх событиях:
+-- Срабатывает при двух событиях:
 --   BufLeave   — при переключении на другой буфер
 --   FocusLost  — при потере фокуса окном Neovim (переключение приложений)
---   InsertLeave — при выходе из режима вставки
 --
 -- Условия для сохранения:
 --   vim.bo.modified  — файл имеет несохранённые изменения
 --   vim.bo.buftype == "" — обычный файловый буфер (не quickfix, не terminal и т.д.)
 --   vim.fn.expand("%") ~= "" — у буфера есть имя файла
---
--- "silent! write" — сохранить без сообщений и без ошибок если файл readonly.
-vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertLeave" }, {
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 	callback = function()
 		if vim.bo.modified and vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
-			vim.cmd("silent! write")
+			-- `silent` скрывает обычное сообщение о записи, но не подавляет ошибку как `silent!`.
+			vim.cmd("silent write")
 		end
+	end,
+})
+
+local noice_progress = vim.api.nvim_create_augroup("NoiceProgressTransparency", {
+	clear = true,
+})
+
+-- Noice создаёт прогресс LSP в окнах с группой NoiceMini.
+-- После создания делаем фон прозрачным, как у остальных всплывающих окон.
+vim.api.nvim_create_autocmd("LspProgress", {
+	group = noice_progress,
+	callback = function()
+		vim.schedule(function()
+			for _, win in ipairs(vim.api.nvim_list_wins()) do
+				if vim.wo[win].winhighlight:find("Normal:NoiceMini", 1, true) then
+					vim.wo[win].winblend = 100
+				end
+			end
+		end)
 	end,
 })

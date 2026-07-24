@@ -1,4 +1,9 @@
+-- =============================================================================
+-- settings/treesitter.lua — синтаксические деревья для используемых языков
+-- =============================================================================
+-- Здесь только парсеры и базовая подсветка: textobjects намеренно даёт mini.ai.
 return {
+	-- Список покрывает конфиг, Rust, Python и фронтенд-стек.
 	ensure_installed = {
 		"lua",
 		"toml",
@@ -13,42 +18,19 @@ return {
 		"html",
 		"css",
 		"regex",
+		"vue",
+		"tsx",
+		"scss",
+		"jsdoc",
+		"jsonc",
+		"matlab",
 	},
 
 	highlight = {
 		enable = true,
+		-- Не смешивать старую regex-подсветку с Tree-sitter.
 		additional_vim_regex_highlighting = false,
 	},
+	-- Tree-sitter использует структуру кода для отступов там, где это поддерживается парсером.
 	indent = { enable = true },
-
-	textobjects = {
-		select = {
-			enable = true,
-			lookahead = true,
-			keymaps = {
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
-				["ac"] = "@class.outer",
-				["ic"] = "@class.inner",
-				["aa"] = "@parameter.outer",
-				["ia"] = "@parameter.inner",
-			},
-			include_surrounding_whitespace = false,
-		},
-
-		move = {
-			enable = true,
-			set_jumps = true,
-		},
-
-		swap = {
-			enable = true,
-			swap_next = {
-				["<leader>a"] = "@parameter.inner",
-			},
-			swap_previous = {
-				["<leader>A"] = "@parameter.inner",
-			},
-		},
-	},
 }
